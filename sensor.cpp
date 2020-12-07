@@ -18,6 +18,16 @@ msg.field_of_view = 0.5;
 msg.radiation_type = sensor_msgs::ULTRASOUND;
 
 int distance = 0 ; 
+while (ros::ok()){
 
+    if (distance > 50 ) 
+    distance = 0;  // reset the distance measurement
+    else
+    distance = distance + 1 ; 
+msg.header.stamp = ros::Time::now();
+msg.range = distance;
+range_pub.publish(msg);
+loop_rate.sleep();
+}
 
 }
